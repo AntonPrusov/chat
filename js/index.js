@@ -5,50 +5,50 @@ var nextMessageId = 0;
 
 drawMessages(nextMessageId);
 
-/*setInterval(() => drawMessages(nextMessageId), 2500 );*/
+setInterval(() => drawMessages(nextMessageId), 4000 );
 
 btnSend.onclick = async function(e) {
 	e.preventDefault();
 	
 	myNick = nick.value;
 	myMessage = message.value;
+	message.value = "";
 
 	var newMessageId = await jsonPost(url, {func: 'addMessage', nick: myNick, message: myMessage});
 	nextMessageId = newMessageId.nextMessageId;
 
-	/*drawMessages(nextMessageId);*/
+	drawMessages(nextMessageId - 1);
 }
-
-
 
 async function drawMessages(id) 
 	{
 		var data = await jsonPost(url, {func: "getMessages", messageId: id});
-		var array = data.data;
+		var array = data.data;		
 		
-		for (var i = array.length - 1; i >= nextMessageId; i--) {
-			let messageTime = new Date(array[i].timestamp);
-			let messageNick = array[i].nick;
-			let messageMessage = array[i].message;
-			let messageLi = document.createElement('li');
-			let messageInfo = document.createElement('p');
-			let messageTimeSpan = document.createElement('span');
-			let messageText = document.createElement('p');
+		if(array.length !== 0) {	
+			array.forEach(message => {
+	            let messageTime = new Date(message.timestamp);
+	            let messageNick = message.nick;
+	            let messageMessage = message.message;
+	            let messageLi = document.createElement('li');
+	            let messageInfo = document.createElement('p');
+	            let messageTimeSpan = document.createElement('span');
+	            let messageText = document.createElement('p');
 
-			messageLi.className  = "list-group-item";
-			messageInfo.className  = "messageInfo";
-			messageInfo.innerHTML = messageNick + "  ";
-			messageTimeSpan.innerHTML = messageTime;
-			messageText.className  = "messageText";
-			messageText.innerHTML = '"' + messageMessage + '"';
+	            messageLi.className  = "list-group-item";
+	            messageInfo.className  = "messageInfo";
+	            messageInfo.innerHTML = messageNick + "  ";
+	            messageTimeSpan.innerHTML = messageTime;
+	            messageText.className  = "messageText";
+	            messageText.innerHTML = '" ' + messageMessage + ' "';
 
-			chat.appendChild(messageLi);
-			messageLi.appendChild(messageInfo);
-			messageInfo.appendChild(messageTimeSpan);
-			messageLi.appendChild(messageText);
-		}
-
-		nextMessageId = data.nextMessageId;
+	            chat.prepend(messageLi);
+	            messageLi.appendChild(messageInfo);
+	            messageInfo.appendChild(messageTimeSpan);
+	            messageLi.appendChild(messageText);
+	        });
+	        nextMessageId = data.nextMessageId;
+        }		
 	}
 
 function jsonPost(url, data)
