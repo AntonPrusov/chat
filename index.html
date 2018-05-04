@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Practice 2018-03-30</title>		
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<div class="container">
+		<h1>Chat Homework</h1>
+		<div class="row">
+			<div class="col-md-9">
+				<div class="panel panel-primary">
+					<div class="panel-heading">Our Chat</div>
+					<div class="panel-body">
+						<div class="panel-body">
+						<form action="" id="form-update">
+							<div class="form-group">
+								<label for="">Your Nick</label>
+								<input type="text" name="nick" id="nick" placeholder="Enter your NickName" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="">Your Message</label>
+								<input type="text" name="message" id="message" placeholder="Type your message here" class="form-control">
+							</div>							
+							<button class="btn btn-info" id="btnSend">Send message</button>						
+						</form>
+						<ul class="list-group message-list" id="chat"></ul>
+					</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	<script src="js/index.js"></script>
+</body>
+</html>

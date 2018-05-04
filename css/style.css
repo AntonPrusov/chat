@@ -1,0 +1,22 @@
+.message-list {
+	margin-top: 15px;
+	margin-bottom: 0;
+	height: 230px;
+	overflow: auto;
+}
+
+.messageInfo {
+	color: red;
+	font-weight: bold;
+}
+
+.messageInfo span {
+	font-weight: 400;
+	font-style: italic;
+	color: #766D6D;
+}
+
+.messageText {
+	color: blue;
+	font-style: italic;
+}
